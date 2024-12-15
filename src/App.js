@@ -16,7 +16,7 @@ const StickyNotesApp = () => {
   const connection = new Connection("https://mainnet.helius-rpc.com/?api-key=41b6dcf4-904b-451d-b2a4-98351135db42");
 
   const connectWebSocket = () => {
-    const newWs = new WebSocket("ws://localhost:3001");
+    const newWs = new WebSocket("wss://sticky-notes-backend-production.up.railway.app");
     
     newWs.onopen = () => {
       console.log('WebSocket connected');
@@ -97,7 +97,7 @@ const StickyNotesApp = () => {
       const signature = await connection.sendRawTransaction(signedTransaction.serialize());
       await connection.confirmTransaction(signature);
   
-      await fetch("http://localhost:3001/api/sticky-notes", {
+      await fetch("https://sticky-notes-backend-production.up.railway.app/api/sticky-notes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
@@ -118,7 +118,7 @@ const StickyNotesApp = () => {
 
   const fetchStickyNotes = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/sticky-notes");
+      const response = await fetch("https://sticky-notes-backend-production.up.railway.app/api/sticky-notes");
       const data = await response.json();
       setNotes(data);
     } catch (error) {

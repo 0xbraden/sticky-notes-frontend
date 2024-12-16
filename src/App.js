@@ -170,7 +170,7 @@ const StickyNotesApp = () => {
               Twitter
             </a>
             <a 
-              href="https://pump.fun" 
+              href="https://pump.fun/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-purple-600 hover:text-purple-800 transition-colors font-medium"

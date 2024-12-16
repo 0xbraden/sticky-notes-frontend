@@ -162,7 +162,7 @@ const StickyNotesApp = () => {
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Solana Sticky Notes</h1>
           <div className="flex justify-center gap-6 text-gray-600">
             <a 
-              href="https://twitter.com" 
+              href="https://x.com/stickynotesgg" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-purple-600 hover:text-purple-800 transition-colors font-medium"
@@ -178,7 +178,7 @@ const StickyNotesApp = () => {
               Pump.fun
             </a>
             <a 
-              href="https://github.com" 
+              href="https://github.com/StickyNotesGG" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-purple-600 hover:text-purple-800 transition-colors font-medium"

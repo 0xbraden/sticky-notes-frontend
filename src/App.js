@@ -16,27 +16,33 @@ const StickyNotesApp = () => {
   const connection = new Connection("https://mainnet.helius-rpc.com/?api-key=41b6dcf4-904b-451d-b2a4-98351135db42");
 
   const connectWebSocket = () => {
-    const newWs = new WebSocket("wss://sticky-notes-backend-production.up.railway.app");
+    const newWs = new WebSocket("wss://sticky-notes-backend-production.up.railway.app/ws");
     
     newWs.onopen = () => {
       console.log('WebSocket connected');
-    };
-
-    newWs.onclose = () => {
-      console.log('WebSocket closed, attempting to reconnect...');
-      setTimeout(connectWebSocket, 3000);
-    };
-
-    newWs.onmessage = (event) => {
-      const newNote = JSON.parse(event.data);
-      setNotes((prevNotes) => {
-        // Check if note with this signature already exists
-        const exists = prevNotes.some(note => note.signature === newNote.signature);
-        if (exists) {
-          return prevNotes; // Don't add if it already exists
+      // Add ping/pong handling
+      setInterval(() => {
+        if (newWs.readyState === WebSocket.OPEN) {
+          newWs.send('ping');
         }
-        return [...prevNotes, newNote];
-      });
+      }, 25000);
+    };
+  
+    newWs.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === 'initial') {
+          setNotes(data.notes);
+        } else {
+          setNotes((prevNotes) => {
+            const exists = prevNotes.some(note => note.signature === data.signature);
+            if (exists) return prevNotes;
+            return [data, ...prevNotes];
+          });
+        }
+      } catch (error) {
+        console.error('Error processing WebSocket message:', error);
+      }
     };
 
     newWs.onerror = (error) => {

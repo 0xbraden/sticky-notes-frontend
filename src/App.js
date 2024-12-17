@@ -181,7 +181,7 @@ const StickyNotesApp = () => {
               Twitter
             </a>
             <a 
-              href="https://pump.fun/" 
+              href="https://pump.fun/coin/E4Yzu4JeJ59HQgDjzjp4NMyWEwXdW4EXng5qkkWTpump" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-purple-600 hover:text-purple-800 transition-colors font-medium"
